@@ -2,18 +2,6 @@
 
 Web service de petició de treballs des d'Ajuntament
 
-Índex
-
-[Especificació 3](#_Toc166771444)
-
-[Seguretat 4](#_Toc166771445)
-
-[Pre-producció 4](#_Toc166771446)
-
-[Producció 4](#_Toc166771447)
-
-[Exemple d'ús 5](#_Toc166771448)
-
 # Especificació
 
 PeticioTreballs és un web service que permet demanar treballs en diferit i recuperar els fitxers que genera.

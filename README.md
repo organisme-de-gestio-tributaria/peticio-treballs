@@ -62,9 +62,9 @@ A la secció Response ens surt la informació sobre els paràmetres del treball,
 {"CodiClient":null,"NomTreball":"xbentri","Retorn":null,"ValorsParametres":\[{"DefinicioParametre":{"Llargaria":3,"Nom":"cdclie","Tipus":1},"ValorParametre":null},{"DefinicioParametre":{"Llargaria":4,"Nom":"cdexer","Tipus":1},"ValorParametre":null},{"DefinicioParametre":{"Llargaria":1,"Nom":"trimes","Tipus":0},"ValorParametre":null}\]}
 
 - Canviem el desplegable "Method" a "POST"
-- Agafem la informació de la secció Response i l'enganxem al camp "Body", modifiquem aquesta informació, posant on diu "Null" les dades concretes de la petició (en groc), o copiem aquest exemple tal qual:
+- Agafem la informació de la secció Response i l'enganxem al camp "Body", modifiquem aquesta informació, posant on diu "Null" les dades concretes de la petició (en negreta), o copiem aquest exemple tal qual:
 
-{"CodiClient":"001","NomTreball":"xbentri","Retorn":null,"ValorsParametres":\[{"DefinicioParametre":{"Llargaria":3,"Nom":"cdclie","Tipus":1},"ValorParametre":"001"},{"DefinicioParametre":{"Llargaria":4,"Nom":"cdexer","Tipus":1},"ValorParametre":"2023"},{"DefinicioParametre":{"Llargaria":1,"Nom":"trimes","Tipus":0},"ValorParametre":"1"}\]}
+{"CodiClient":"001","NomTreball":"xbentri","Retorn":null,"ValorsParametres":\[{"DefinicioParametre":{"Llargaria":3,"Nom":"cdclie","Tipus":1},"ValorParametre":**"001"**},{"DefinicioParametre":{"Llargaria":4,"Nom":"cdexer","Tipus":1},"ValorParametre":**"2023"**},{"DefinicioParametre":{"Llargaria":1,"Nom":"trimes","Tipus":0},"ValorParametre":**"1"**}\]}
 
 - Canviem la URL a <https://wsproves.orgt.diba.cat/PeticioTreballs/PeticioTreballs.svc/rest/DemanaTreball>
 - A dalt de la pàgina despleguem "Headers" i seleccionem "Custom Header". Al camp “Name” posem "Content-Type", al camp "Attribute Value" posem "text/json", i premem el botó "Okay". Veurem que a la secció “Headers” ens ha afegit aquesta informació.

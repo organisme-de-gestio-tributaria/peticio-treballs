@@ -1,0 +1,424 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v1",
+		"title": "Petició de treballs - ORGT",
+		"description": "RESTful API per a la petició de treballs batch."
+	},
+	"host": "wsproves.orgt.diba.cat",
+	"schemes": [
+		"https"
+	],
+	"paths": {
+		"/PeticioTreballsREST/treballs/{nomTreball}": {
+			"get": {
+				"tags": [
+					"Treball"
+				],
+				"summary": "Obté les dades necessàries per tal de crear una petició d'un treball\r\nEn cas d'error, es retorna una instància del tipus propi Error, e.g.: {\"Codi\": 400, \"Detall\": \"...\"}",
+				"operationId": "Treball_ObteDescripcioTreball",
+				"consumes": [],
+				"produces": [
+					"application/json",
+				],
+				"parameters": [
+					{
+						"name": "nomTreball",
+						"in": "path",
+						"description": "Nom del treball (8 caràcters màxim). Exemple: xbentri",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"400": {
+						"description": "Nom de treball incorrecte"
+					},
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DadesPeticio"
+						},
+						"examples": {
+							"application/json": {
+								"NomTreball": {
+									"Valor": "xbentri"
+								},
+								"CodiClient": null,
+								"ValorsParametres": [
+									{
+										"Definicio": {
+											"Nom": "cdclie",
+											"Tipus": "Numeric",
+											"Llargaria": 3
+										}
+									},
+									{
+										"Definicio": {
+											"Nom": "cdexer",
+											"Tipus": "Numeric",
+											"Llargaria": 4
+										}
+									},
+									{
+										"Definicio": {
+											"Nom": "trimes",
+											"Tipus": "Alfanumeric",
+											"Llargaria": 1
+										}
+									}
+								],
+								"ResultatExecucio": null
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Treball"
+				],
+				"summary": "Demana un treball",
+				"operationId": "Treball_CreaPeticioTreball",
+				"consumes": [
+					"application/json",
+				],
+				"produces": [
+					"application/json",
+				],
+				"parameters": [
+					{
+						"name": "nomTreball",
+						"in": "path",
+						"description": "Nom del treball (8 caràcters màxim). Exemple: xbentri",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "dadesPeticio",
+						"in": "body",
+						"description": "Dades de la petició",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DadesPeticio"
+						}
+					}
+				],
+				"responses": {
+					"400": {
+						"description": "Cal proporcionar el nom del treball i les dades de la petició"
+					},
+					"401": {
+						"description": "Falta autenticació, autenticació incorrecta o no autoritzat pel treball demanat"
+					},
+					"404": {
+						"description": "El client no existeix"
+					},
+					"406": {
+						"description": "El client correspon a un municipi no adherit"
+					},
+					"500": {
+						"description": "Error en la gestió de la petició"
+					},
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResultatPeticio"
+						},
+						"examples": {
+							"application/json": {
+								"NumeroPeticio": 6789,
+								"Resultat": null
+							}
+						}
+					}
+				}
+			}
+		},
+		"/PeticioTreballsREST/treballs/{nomTreball}/peticio/{idPeticio}": {
+			"get": {
+				"tags": [
+					"Treball"
+				],
+				"summary": "Obté l'estat d'una petició",
+				"operationId": "Treball_ObteEstatPeticio",
+				"consumes": [],
+				"produces": [
+					"application/json",
+				],
+				"parameters": [
+					{
+						"name": "nomTreball",
+						"in": "path",
+						"description": "Nom del treball",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "idPeticio",
+						"in": "path",
+						"description": "Número de la petició obtingut al crear la petició del treball\"/&gt;",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"400": {
+						"description": "Nom de treball o client incorrectes"
+					},
+					"500": {
+						"description": "Error genèric de servidor"
+					},
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResultatExecucio"
+						},
+						"examples": {
+							"application/json": {
+								"Estat": "Finalitzat",
+								"Fitxers": {
+									"Fitxer": [
+										{
+											"Nom": "Fitxer1.xlsx",
+											"Descripcio": "Fitxer resultat 1"
+										},
+										{
+											"Nom": "Fitxer word.docx",
+											"Descripcio": "Segon fitxer"
+										}
+									]
+								},
+								"Resultat": null
+							}
+						}
+					}
+				}
+			}
+		},
+		"/PeticioTreballsREST/treballs/{nomTreball}/peticio/{idPeticio}/fitxers/{nomFitxer}": {
+			"get": {
+				"tags": [
+					"Treball"
+				],
+				"summary": "Obté el fitxer resultat d'una petició.",
+				"description": "El resultat s'envia com application/octet-stream  i \"Content-Disposition: attachment; filename=\"{fitxer}\". \r\n            La codificació és ISO-8859-1. En cas d'error es retorna una instància de \"Retorn\"",
+				"operationId": "Treball_ObteFitxersPeticio",
+				"consumes": [],
+				"produces": [
+				],
+				"parameters": [
+					{
+						"name": "nomTreball",
+						"in": "path",
+						"description": "Nom d'un dels fitxers retornat pel mètode GET de consulta de peticions\"/&gt;",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "idPeticio",
+						"in": "path",
+						"description": "Número de la petició obtingut al crear la petició del treball\"/&gt;",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "nomFitxer",
+						"in": "path",
+						"description": "Nom del fitxer a obtenir",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"400": {
+						"description": "Nom de treball o client incorrectes"
+					},
+					"404": {
+						"description": "Fitxer inexistent"
+					},
+					"500": {
+						"description": "Error genèric de servidor"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"DadesPeticio": {
+			"description": "Petició d'un treball",
+			"type": "object",
+			"properties": {
+				"NomTreball": {
+					"$ref": "#/definitions/NomTreball",
+					"description": "Nom del treball"
+				},
+				"CodiClient": {
+					"$ref": "#/definitions/CodiClient",
+					"description": "Codi client, ha de contenir 3 digits (0-9)."
+				},
+				"ValorsParametres": {
+					"description": "Paràmetres dels treballs i els seus valors",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ValorParametre"
+					}
+				},
+				"ResultatExecucio": {
+					"$ref": "#/definitions/Retorn",
+					"description": "Resultat de l'execució. Quan es demana l'execució d'un treball, aquest camp ha de ser buit. \r\nQuan es demana el resultat es retorna amb els corresponents valors."
+				}
+			}
+		},
+		"NomTreball": {
+			"description": "Wrapper del string de NomTreball. El Wrapper és necessari per utilitzar-lo en la URI i poder tenir validacions en DataAnnotations",
+			"required": [
+				"Valor"
+			],
+			"type": "object",
+			"properties": {
+				"Valor": {
+					"pattern": "^[a-zA-Z0-9_]{1,8}$",
+					"type": "string"
+				}
+			}
+		},
+		"CodiClient": {
+			"description": "Wrapper del string de CodiClient. El Wrapper és necessari per utilitzar-lo en la URI i poder tenir validacions en DataAnnotations",
+			"required": [
+				"Valor"
+			],
+			"type": "object",
+			"properties": {
+				"Valor": {
+					"pattern": "^\\d{3}$",
+					"type": "string"
+				}
+			}
+		},
+		"ValorParametre": {
+			"description": "Nom del paràmetre, tipus i valor",
+			"type": "object",
+			"properties": {
+				"Definicio": {
+					"$ref": "#/definitions/DefinicioParametre",
+					"description": "Definició del paràmetre: nom del paràmetre i tipus"
+				},
+				"Valor": {
+					"description": "Valor del paràmetre (format string)",
+					"type": "string"
+				}
+			}
+		},
+		"Retorn": {
+			"description": "Resultat de l'execució",
+			"type": "object",
+			"properties": {
+				"CodiRetorn": {
+					"description": "Codi d'error de l'execució, si n'hi ha",
+					"type": "string"
+				},
+				"DescripcioError": {
+					"description": "Descripció de l'error, si n'hi ha",
+					"type": "string"
+				}
+			}
+		},
+		"DefinicioParametre": {
+			"description": "Definició d'un paràmetre: nom i tipus",
+			"required": [
+				"Nom",
+				"Tipus"
+			],
+			"type": "object",
+			"properties": {
+				"Nom": {
+					"description": "Nom del paràmetre",
+					"type": "string"
+				},
+				"Tipus": {
+					"description": "Tipus del paràmetre",
+					"enum": [
+						"Alfanumeric",
+						"Numeric",
+						"DataObligatoria",
+						"DataOpcional",
+						"Import",
+						"Fitxer"
+					],
+					"type": "string"
+				},
+				"Llargaria": {
+					"format": "int32",
+					"description": "Llargària del paràmetre",
+					"type": "integer"
+				}
+			}
+		},
+		"ResultatPeticio": {
+			"description": "Resultat de la petició",
+			"type": "object",
+			"properties": {
+				"NumeroPeticio": {
+					"format": "int32",
+					"description": "Número de la petició",
+					"type": "integer"
+				},
+				"Resultat": {
+					"$ref": "#/definitions/Retorn",
+					"description": "Resultat"
+				}
+			}
+		},
+		"ResultatExecucio": {
+			"description": "Resultat actual d'una execució",
+			"type": "object",
+			"properties": {
+				"Estat": {
+					"enum": [
+						"Pendent",
+						"Finalitzat",
+						"Erroni"
+					],
+					"type": "string"
+				},
+				"Fitxers": {
+					"$ref": "#/definitions/LlistaFitxers"
+				},
+				"Resultat": {
+					"$ref": "#/definitions/Retorn"
+				}
+			}
+		},
+		"LlistaFitxers": {
+			"type": "object",
+			"properties": {
+				"Fitxer": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/InformacioFitxer"
+					}
+				}
+			}
+		},
+		"InformacioFitxer": {
+			"type": "object",
+			"properties": {
+				"Nom": {
+					"type": "string"
+				},
+				"Descripcio": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"securityDefinitions": {
+		"basic": {
+			"type": "basic",
+			"description": "Basic HTTP Authentication"
+		}
+	}
+}

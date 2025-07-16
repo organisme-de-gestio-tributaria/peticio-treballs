@@ -1,0 +1,33 @@
+{
+	"NomTreball": {
+		"Valor": "xbentri"
+	},
+	"CodiClient": null,
+	"ValorsParametres": [
+		{
+			"Definicio": {
+				"Nom": "cdclie",
+				"Tipus": "Numeric",
+				"Llargaria": 3
+			},
+			"Valor": null
+		},
+		{
+			"Definicio": {
+				"Nom": "cdexer",
+				"Tipus": "Numeric",
+				"Llargaria": 4
+			},
+			"Valor": null
+		},
+		{
+			"Definicio": {
+				"Nom": "trimes",
+				"Tipus": "Alfanumeric",
+				"Llargaria": 1
+			},
+			"Valor": null
+		}
+	],
+	"ResultatExecucio": null
+}

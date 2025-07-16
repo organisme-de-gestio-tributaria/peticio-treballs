@@ -15,7 +15,7 @@
 				"tags": [
 					"Treball"
 				],
-				"summary": "Obté les dades necessàries per tal de crear una petició d'un treball\r\nEn cas d'error, es retorna una instància del tipus propi Error, e.g.: {\"Codi\": 400, \"Detall\": \"...\"}",
+				"summary": "Obté les dades necessàries per tal de crear una petició d'un treball\r\nEn cas d'error es retorna una instància de \"Retorn\"",
 				"operationId": "Treball_ObteDescripcioTreball",
 				"consumes": [],
 				"produces": [

@@ -13,7 +13,7 @@ Respecte a la seguretat, cal tenir en compte:
    - A producció s'accedeix al webservice mitjançant certificat d'Òrgan a nom de l'Ajuntament. Concretament, el certificat ha de tenir al camp VinculatedCompanyCIF el CIF de l'Ajuntament. A producció es comprovarà que les dades enviades corresponen a l’Ajuntament corresponent al certificat. 
    - A pre-producció es pot accedir al webservice amb un certificat que no sigui d'òrgan. 
 1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT.** Vegeu el procés de sol·licitud a la [pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria). És necessari fer-ho amb el certificat que s'utilitzarà tant a pre-producció com a producció.
-1. A més del certificat, cal utilitzar autenticació bàsica amb l'usuari i password que l'ajuntament utilitza a la ORGT per a tots els endpoints excepte /treballs/nomTreball GET. 
+1. A més del certificat, cal utilitzar autenticació bàsica amb l'usuari i password que l'ajuntament utilitza a la ORGT per a tots els endpoints excepte /treballs/nomTreball GET  i  /municipis. 
 
 Els endpoints disponibles són:
 1. **treballs/{nomTreball} GET** Obté les dades necessàries per tal de crear una petició d'un treball. L'estructura retornada es pot fer servir, omplint els atributs ValorParametre, per demanar el treball amb el corresponent endpoint. En cas d'error, es retorna una instància de "Retorn" informada amb el CodiRetorn i DescripcioError. Només es poden obtenir les dades de treballs pensats per a Ajuntaments, és a dir, que tenen almenys un paràmetre amb el codi de l'Ajuntament. Els paràmetres són:
@@ -23,7 +23,7 @@ Aquest és l'únic endpoint que no requereix autenticació bàsica. Sí requerei
 
 1. **treballs/{nomTreball} POST** Realitza la petició d'executar un treball en diferit proporcionant les dades necessàries per a l'execució. Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Si ha hagut un error en demanar la petició, retorna informada l'estructura amb el CodiRetorn i DescripcioError. La petició s’entén feta per l’Ajuntament associat al certificat amb el qual s’accedeix (que és el mateix que el proporcionat en l'autenticació bàsica). Només es poden demanar treballs pensats per a Ajuntaments, és a dir, que tenen almenys un paràmetre amb el codi de l'Ajuntament. Cal emplenar tots els paràmetres, cap d'ells no pot ser null, si és opcional cal posar "".
    - URI: nomTreball. (8 caràcters màxim). Exemple: xbentri
-   - Body: dadesPeticio. Petició amb les dades, [podeu veure un exemple aquí](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20peticio%20treball%20POST.json). Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Les dades consisteixen en el nom del treball, el codi de client que identifica l'ajuntament i els paràmetres del treball juntament amb el seu valor. Podeu obtenir una llista dels codis de client i el nom del municipi en [aquest enllaç](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirMunicipis).<br><br>
+   - Body: dadesPeticio. Petició amb les dades, [podeu veure un exemple aquí](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20peticio%20treball%20POST.json). Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Les dades consisteixen en el nom del treball, el codi de client que identifica l'ajuntament i els paràmetres del treball juntament amb el seu valor. Podeu obtenir una llista dels codis de client i el nom del municipi a través de l'endpoint /municipis.<br><br>
 Codis d'error de retorn:
         - 400: Cal proporcionar el nom del treball i les dades de la petició       
         - 401: Falta autenticació, autenticació incorrecta o no autoritzat pel treball demanat
@@ -55,6 +55,9 @@ Codis d'error de retorn:
         - 404: Fitxer inexistent
         - 406: El client correspon a un municipi no adherit
         - 500: Error en la gestió de la petició
+
+1. **municipis** Obté la llista de municipis amb el codi de client associat. En les crides als webservices de la ORGT, un municipi s'identifica pel codi de client. Aquest endpoint permet obtenir-los. La llista té el format `[{"Nom": "Municipi 1", "CodiClient": "001"}, {"Nom": "Municipi 2", "CodiClient": "002"}, ...]`
+
 
 ## Exemples de crides i respostes
 A continuació es presenten diversos exemples de crides i respostes. Podeu trobar més informació a l'[especificació swagger](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/swagger%20PeticioTreballsREST.json).

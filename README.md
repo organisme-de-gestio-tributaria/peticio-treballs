@@ -17,7 +17,7 @@ Respecte a la seguretat, cal tenir en compte:
 
 Els endpoints disponibles són:
 
-1. **treballs/{nomTreball} GET** Obté les dades necessàries per tal de crear una petició d'un treball. L'estructura retornada es pot fer servir, omplint els atributs ValorParametre, per demanar el treball amb el corresponent endpoint. En cas d'error, es retorna una instància de "Retorn" informada amb el CodiRetorn i DescripcioError. Només es poden obtenir les dades de treballs pensats per a Ajuntaments, és a dir, que tenen almenys un paràmetre amb el codi de l'Ajuntament.
+1. **treballs/{nomTreball} GET** Obté la definició del treball amb les dades necessàries per tal de crear una petició d'un treball. L'estructura retornada es pot fer servir, omplint els atributs ValorParametre, per demanar el treball amb el corresponent endpoint. En cas d'error, es retorna una instància de "Retorn" informada amb el CodiRetorn i DescripcioError. Només es poden obtenir les dades de treballs pensats per a Ajuntaments, és a dir, que tenen almenys un paràmetre amb el codi de l'Ajuntament.
     
     Aquest endpoint només té un paràmetre en el path:
     - nomTreball. (8 caràcters màxim). Exemple: xbentri
@@ -84,7 +84,7 @@ A continuació es presenten diversos exemples de crides i respostes. Podeu troba
 | Endpoint | Mètode HTTP | Exemples | Requereix identificació amb certificat de client | Requereix autenticació bàsica |
 |---|---|---|---|---|
 | 1. Obté municipis | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/municipis) <br> [Resposta](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%202%20-%20municipis.json) | Si | No
-| 2. Obté descripció dades | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri) <br> [Resposta](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%200%20resposta%20amb%20descripcio.json) | Si | No
+| 2. Obté definició treball | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri) <br> [Resposta](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%200%20resposta%20amb%20descripcio.json) | Si | No
 | 3. Crea petició treball | POST | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri) <br> [Dades a enviar a l'endpoint com a body de la petició](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20peticio%20treball%20POST.json) <br> [Resposta amb número de petició](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20resposta%20amb%20num%20peticio.json) | Si | Si
 | 4. Consulta estat (pendent) | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri/peticio/2027605) <br> [Resposta estat pendent](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%202%20resposta%20pendent.json) | Si | Si
 | 5. Consulta estat (finalitzat) | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri/peticio/2027605) <br> [Resposta estat finalitzat i fitxers](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%203%20resposta%20finalitzat%20amb%20fitxers.json) | Si | Si

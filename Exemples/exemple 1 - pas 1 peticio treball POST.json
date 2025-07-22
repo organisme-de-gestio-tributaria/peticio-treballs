@@ -1,10 +1,6 @@
 {
-	"NomTreball": {
-		"Valor": "xbentri"
-	},
-	"CodiClient": {
-		"Valor": "001"
-	},
+	"NomTreball": "xbentri",
+	"CodiClient": "001",
 	"ValorsParametres": [
 		{
 			"Definicio": {

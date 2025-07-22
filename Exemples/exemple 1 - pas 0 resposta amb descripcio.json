@@ -1,7 +1,5 @@
 {
-	"NomTreball": {
-		"Valor": "xbentri"
-	},
+	"NomTreball": "xbentri",
 	"CodiClient": null,
 	"ValorsParametres": [
 		{

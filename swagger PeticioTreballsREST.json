@@ -15,11 +15,15 @@
 				"tags": [
 					"Treball"
 				],
-				"summary": "Obté les dades necessàries per tal de crear una petició d'un treball\r\nEn cas d'error es retorna una instància de \"Retorn\"",
+				"summary": "Obté les dades necessàries per tal de crear una petició d'un treball",
 				"operationId": "Treball_ObteDescripcioTreball",
 				"consumes": [],
 				"produces": [
 					"application/json",
+				 
+					   
+				
+				
 				],
 				"parameters": [
 					{
@@ -32,7 +36,10 @@
 				],
 				"responses": {
 					"400": {
-						"description": "Nom de treball incorrecte"
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/Retorn"
+						}
 					},
 					"200": {
 						"description": "OK",
@@ -41,9 +48,7 @@
 						},
 						"examples": {
 							"application/json": {
-								"NomTreball": {
-									"Valor": "xbentri"
-								},
+								"NomTreball": "xbentri",
 								"CodiClient": null,
 								"ValorsParametres": [
 									{
@@ -82,9 +87,18 @@
 				"operationId": "Treball_CreaPeticioTreball",
 				"consumes": [
 					"application/json",
+				 
+					   
+				
+										 
+				
 				],
 				"produces": [
 					"application/json",
+				 
+					   
+				
+				
 				],
 				"parameters": [
 					{
@@ -106,7 +120,10 @@
 				],
 				"responses": {
 					"400": {
-						"description": "Cal proporcionar el nom del treball i les dades de la petició"
+						"description": "Cal proporcionar el nom del treball i les dades de la petició",
+						"schema": {
+							"$ref": "#/definitions/ResultatPeticio"
+						}
 					},
 					"401": {
 						"description": "Falta autenticació, autenticació incorrecta o no autoritzat pel treball demanat"
@@ -145,6 +162,10 @@
 				"consumes": [],
 				"produces": [
 					"application/json",
+				 
+					   
+				
+				
 				],
 				"parameters": [
 					{
@@ -165,7 +186,10 @@
 				],
 				"responses": {
 					"400": {
-						"description": "Nom de treball o client incorrectes"
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ResultatExecucio"
+						}
 					},
 					"500": {
 						"description": "Error genèric de servidor"
@@ -202,11 +226,16 @@
 				"tags": [
 					"Treball"
 				],
-				"summary": "Obté el fitxer resultat d'una petició.",
+				"summary": "Obté un fitxer resultat d'una petició.",
 				"description": "El resultat s'envia com application/octet-stream  i \"Content-Disposition: attachment; filename=\"{fitxer}\". \r\n            La codificació és ISO-8859-1. En cas d'error es retorna una instància de \"Retorn\"",
 				"operationId": "Treball_ObteFitxersPeticio",
 				"consumes": [],
 				"produces": [
+						
+				 
+					   
+				
+				
 				],
 				"parameters": [
 					{
@@ -244,20 +273,79 @@
 					}
 				}
 			}
+		},
+		"/municipis": {
+			"get": {
+				"tags": [
+					"Treball"
+				],
+				"summary": "Obté la llista de municipis amb els codis de client associats",
+				"operationId": "Treball_ObteLlistaMunicipis",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml",
+					"text/html"
+				],
+				"responses": {
+					"500": {
+						"description": "Error genèric de servidor"
+					},
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Municipi"
+							}
+						},
+						"examples": {
+							"application/json": [
+								{
+									"Nom": "Abrera",
+									"CodiClient": "001"
+								},
+								{
+									"Nom": "Aguilar de Segarra",
+									"CodiClient": "002"
+								},
+								{
+									"Nom": "Alella",
+									"CodiClient": "003"
+								}
+							]
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/Retorn"
+						}
+					}
+				}
+			}
 		}
 	},
 	"definitions": {
 		"DadesPeticio": {
 			"description": "Petició d'un treball",
+			"required": [
+				"NomTreball",
+				"CodiClient"
+			],
 			"type": "object",
 			"properties": {
 				"NomTreball": {
-					"$ref": "#/definitions/NomTreball",
-					"description": "Nom del treball"
+					"description": "Nom del treball",
+					"pattern": "^[a-zA-Z0-9_]{1,8}$",
+					"type": "string"
 				},
 				"CodiClient": {
-					"$ref": "#/definitions/CodiClient",
-					"description": "Codi client, ha de contenir 3 digits (0-9)."
+					"description": "Codi client, ha de contenir 3 digits (0-9).",
+					"pattern": "^\\d{3}$",
+					"type": "string"
 				},
 				"ValorsParametres": {
 					"description": "Paràmetres dels treballs i els seus valors",
@@ -269,32 +357,6 @@
 				"ResultatExecucio": {
 					"$ref": "#/definitions/Retorn",
 					"description": "Resultat de l'execució. Quan es demana l'execució d'un treball, aquest camp ha de ser buit. \r\nQuan es demana el resultat es retorna amb els corresponents valors."
-				}
-			}
-		},
-		"NomTreball": {
-			"description": "Wrapper del string de NomTreball. El Wrapper és necessari per utilitzar-lo en la URI i poder tenir validacions en DataAnnotations",
-			"required": [
-				"Valor"
-			],
-			"type": "object",
-			"properties": {
-				"Valor": {
-					"pattern": "^[a-zA-Z0-9_]{1,8}$",
-					"type": "string"
-				}
-			}
-		},
-		"CodiClient": {
-			"description": "Wrapper del string de CodiClient. El Wrapper és necessari per utilitzar-lo en la URI i poder tenir validacions en DataAnnotations",
-			"required": [
-				"Valor"
-			],
-			"type": "object",
-			"properties": {
-				"Valor": {
-					"pattern": "^\\d{3}$",
-					"type": "string"
 				}
 			}
 		},
@@ -410,6 +472,18 @@
 					"type": "string"
 				},
 				"Descripcio": {
+					"type": "string"
+				}
+			}
+		},
+		"Municipi": {
+			"description": "Municipi. En les peticions a la ORGT s'utilitza el codi de client per a identificar-lo",
+			"type": "object",
+			"properties": {
+				"Nom": {
+					"type": "string"
+				},
+				"CodiClient": {
 					"type": "string"
 				}
 			}

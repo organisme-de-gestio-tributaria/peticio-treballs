@@ -81,7 +81,7 @@ Els endpoints disponibles són:
 ## Exemples de crides i respostes
 A continuació es presenten diversos exemples de crides i respostes. Podeu trobar més informació a l'[especificació swagger](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/swagger%20PeticioTreballsREST.json).
 
-| Endpoint | Mètode HTTP | Exemples | Requereix identificació amb certificat Client | Requereix autenticació bàsica |
+| Endpoint | Mètode HTTP | Exemples | Requereix identificació amb certificat de client | Requereix autenticació bàsica |
 |---|---|---|---|---|
 | 1. Obté municipis | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/municipis) <br> [Resposta](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%202%20-%20municipis.json) | Si | No
 | 2. Obté descripció dades | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri) <br> [Resposta](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%200%20resposta%20amb%20descripcio.json) | Si | No

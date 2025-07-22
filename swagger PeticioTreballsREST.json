@@ -20,10 +20,6 @@
 				"consumes": [],
 				"produces": [
 					"application/json",
-				 
-					   
-				
-				
 				],
 				"parameters": [
 					{
@@ -87,18 +83,9 @@
 				"operationId": "Treball_CreaPeticioTreball",
 				"consumes": [
 					"application/json",
-				 
-					   
-				
-										 
-				
 				],
 				"produces": [
 					"application/json",
-				 
-					   
-				
-				
 				],
 				"parameters": [
 					{
@@ -162,10 +149,6 @@
 				"consumes": [],
 				"produces": [
 					"application/json",
-				 
-					   
-				
-				
 				],
 				"parameters": [
 					{
@@ -231,11 +214,6 @@
 				"operationId": "Treball_ObteFitxersPeticio",
 				"consumes": [],
 				"produces": [
-						
-				 
-					   
-				
-				
 				],
 				"parameters": [
 					{
@@ -274,7 +252,7 @@
 				}
 			}
 		},
-		"/municipis": {
+		"/PeticioTreballsREST/municipis": {
 			"get": {
 				"tags": [
 					"Treball"

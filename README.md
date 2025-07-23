@@ -89,10 +89,3 @@ A continuació es presenten diversos exemples de crides i respostes. Podeu troba
 | 4. Consulta estat (pendent) | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri/peticio/2027605) <br> [Resposta estat pendent](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%202%20resposta%20pendent.json) | Si | Si
 | 5. Consulta estat (finalitzat) | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri/peticio/2027605) <br> [Resposta estat finalitzat i fitxers](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%203%20resposta%20finalitzat%20amb%20fitxers.json) | Si | Si
 | 6. Consulta fitxer | GET | [URL petició](https://wsproves.orgt.diba.cat/PeticioTreballsREST/treballs/xbentri/peticio/2027642/fitxers/Beneficis%20fiscals%20i%20impacte%20en%20recaptaci%C3%B3_Beneficis_Fiscals_Resum_IAE_001_2024_4_204151.xls) <br> [Resposta amb contingut de fitxer](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%204%20resposta%20contingut%20fitxer.xls) | Si | Si
-
-
-# a tenir en compte (revisar i esborrar)
-- oferir endpoint amb la llista de municipis en format json?
-- Per evitar penalitzar els usuaris d'oficines, les peticions s'assignaran a una cua exclusiva per a aquest tipus de treballs.
-- Per temes d'auditoria, es faran logs de les peticions dels treballs, tot indicant el nom que figura al certificat (SubjectName).
-- Està previst que en un futur es puguin passar fitxers sencers com a paràmetre: els paràmetres de tipus "FitxerCarpetaXarxa permeten posar el contingut codificat en base 64 del fitxer que es vol processar. [↑](#footnote-ref-1)

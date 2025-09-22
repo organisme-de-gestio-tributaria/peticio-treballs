@@ -13,7 +13,9 @@ Respecte a la seguretat, cal tenir en compte:
    - A producció s'accedeix al webservice mitjançant certificat d'Òrgan a nom de l'Ajuntament. Concretament, el certificat ha de tenir el CIF de l'Ajuntament com a valor del camp VinculatedCompanyCIF. A producció es comprovarà que les dades enviades corresponen a l’Ajuntament corresponent al certificat. 
    - A pre-producció es pot accedir al webservice amb un certificat que no sigui d'òrgan. 
 1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT.** Vegeu el procés de sol·licitud a la [pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria). És necessari fer-ho amb el certificat que s'utilitzarà tant a pre-producció com a producció.
-1. A més del certificat, cal utilitzar autenticació bàsica amb l'usuari i password que l'ajuntament utilitza a la ORGT per a tots els endpoints excepte /treballs/nomTreball GET  i  /municipis. 
+1. A més del certificat, cal utilitzar autenticació bàsica HTTP amb un usuari i password que identificaran l'ajuntament en el webservice.
+   - Aquest usuari és necessari en tots els endpoints excepte /treballs/nomTreball GET  i  /municipis.
+   - Aquest usuari es gestiona diferent en funció de l'entorn. A integració cal que la ORGT generi l'usuari i el password. A producció l'ajuntament gestiona l'alta i manteniment a través de la opció I12 del WTP.
 
 Els endpoints disponibles són:
 
@@ -26,7 +28,7 @@ Els endpoints disponibles són:
     Aquest endpoint juntament amb el de municipis no requereix autenticació bàsica. Sí requereix identificar-se amb un certificat d'òrgan prèviament compartit amb l'ORGT.
 
 
-1. **treballs/{nomTreball} POST** Realitza la petició d'executar un treball en diferit proporcionant les dades necessàries per a l'execució. Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Si ha hagut un error en demanar la petició, retorna informada l'estructura amb el CodiRetorn i DescripcioError. La petició s’entén feta per l’Ajuntament associat al certificat amb el qual s’accedeix (que és el mateix que el proporcionat en l'autenticació bàsica). Només es poden demanar treballs pensats per a Ajuntaments, és a dir, que tenen almenys un paràmetre amb el codi de l'Ajuntament. Cal emplenar tots els paràmetres, cap d'ells no pot ser null, si és opcional cal posar "".
+1. **treballs/{nomTreball} POST** Realitza la petició d'executar un treball en diferit proporcionant les dades necessàries per a l'execució. Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Si ha hagut un error en demanar la petició, retorna informada l'estructura amb el CodiRetorn i DescripcioError. La petició s’entén feta per l’Ajuntament associat al certificat amb el qual s’accedeix (al que pertany l'usuari proporcionat en l'autenticació bàsica). Només es poden demanar treballs pensats per a Ajuntaments, és a dir, que tenen almenys un paràmetre amb el codi de l'Ajuntament. Cal emplenar tots els paràmetres, cap d'ells no pot ser null, si és opcional cal posar "".
     
     Aquest endpoint té com a paràmetres:
    - Paràmetre del path: nomTreball. (8 caràcters màxim). Exemple: xbentri

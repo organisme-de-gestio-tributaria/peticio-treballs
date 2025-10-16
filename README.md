@@ -2,6 +2,14 @@
 
 PeticioTreballs és un web service que permet demanar treballs en diferit i recuperar els fitxers que genera. 
 
+## Procediment d’adhesió
+1. Descarregar el [formulari d'adhesió](https://github.com/organisme-de-gestio-tributaria/peticio-treballs/blob/main/Formulari%20d'adhesi%C3%B3.pdf). Si no es visualitza al navegador, descarregueu-lo al vostre dispositiu.
+2. Emplenar el formulari.
+3. El formulari l'ha de signar la Tresorer/a, Interventor/a o Alcalde/sa.
+3. Enviar el formulari signat via EACAT a l’ORGT.
+
+## Informació tècnica
+
 Cal accedir al webservice mitjançat l'endpoint REST. L’especificació es pot obtenir del [fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/swagger%20PeticioTreballsREST.json).
 
 El servei es troba a les següents URL's:

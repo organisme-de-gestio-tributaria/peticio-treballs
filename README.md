@@ -20,7 +20,7 @@ Respecte a la seguretat, cal tenir en compte:
 1. L’accés al webservice serà via https amb certificat:
    - A producció s'accedeix al webservice mitjançant certificat d'Òrgan a nom de l'Ajuntament. Concretament, el certificat ha de tenir el CIF de l'Ajuntament com a valor del camp VinculatedCompanyCIF. A producció es comprovarà que les dades enviades corresponen a l’Ajuntament corresponent al certificat. 
    - A pre-producció es pot accedir al webservice amb un certificat que no sigui d'òrgan. 
-1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT.** Vegeu el procés de sol·licitud a la [pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria). És necessari fer-ho amb el certificat que s'utilitzarà tant a pre-producció com a producció.
+1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT.** Vegeu el procediment d'adhesió a l'inici d'aquest web, els detalls estan en el formulari d'adhesió.
 1. A més del certificat, cal utilitzar autenticació bàsica HTTP amb un usuari i password que identificaran l'ajuntament en el webservice.
    - Aquest usuari és necessari en tots els endpoints excepte /treballs/nomTreball GET  i  /municipis.
    - Aquest usuari es gestiona diferent en funció de l'entorn. A integració cal que la ORGT generi l'usuari i el password. A producció l'ajuntament gestiona l'alta i manteniment a través de la opció I12 del WTP.

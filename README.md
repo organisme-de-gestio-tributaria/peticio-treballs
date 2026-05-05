@@ -39,7 +39,7 @@ Els endpoints disponibles són:
 1. **treballs/{nomTreball} POST** Realitza la petició d'executar un treball en diferit proporcionant les dades necessàries per a l'execució. Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Si ha hagut un error en demanar la petició, retorna informada l'estructura amb el CodiRetorn i DescripcioError. La petició s’entén feta per l’Ajuntament associat al certificat amb el qual s’accedeix (al que pertany l'usuari proporcionat en l'autenticació bàsica). Només es poden demanar treballs pensats per a Ajuntaments, és a dir, que tenen almenys un paràmetre amb el codi de l'Ajuntament. Cal emplenar tots els paràmetres, cap d'ells no pot ser null, si és opcional cal posar "".
     
     Aquest endpoint té com a paràmetres:
-   - Paràmetre del path: nomTreball. (8 caràcters màxim). Exemple: xbentri
+   - Paràmetre del path: nomTreball. Pot tenir com a màxim 8 caràcters, i ha d'estar en minúscules. Exemple: xbentri.
    - Body: dadesPeticio. Petició amb les dades, [podeu veure un exemple aquí](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20peticio%20treball%20POST.json). Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Les dades consisteixen en el nom del treball, el codi de client que identifica l'ajuntament i els paràmetres del treball juntament amb el seu valor. Podeu obtenir una llista dels codis de client i el nom del municipi a través de l'endpoint /municipis.
 
     Codis d'error de retorn:
@@ -55,7 +55,7 @@ Els endpoints disponibles són:
 1. **treballs/{nomTreball}/peticio/{idPeticio} GET** Obté l'estat d'execució d'una petició. Els estats poden ser "Pendent", "Finalitzat" o "Erroni". Si el treball ha finalitzat i ha generat fitxers, es retorna també el nom de tots els fitxers generats pel treball. Quan el treball està "Pendent", vol dir que encara no s'ha iniciat la execució o que s'està executant. Es comprova que només es poden consultar peticions fetes pel mateix Ajuntament que consulta el resultat, d’acord amb el certificat digital aportat en fer la consulta. 
     
     Aquest endpoint té dos paràmetres al path:
-   - nomTreball. (8 caràcters màxim). Exemple: xbentri
+   - nomTreball. Pot tenir com a màxim 8 caràcters, i ha d'estar en minúscules. Exemple: xbentri.
    - idPeticio. Número de petició obtingut prèviament al realitzar la petició.
      
     Codis d'error de retorn:
@@ -73,7 +73,7 @@ Els endpoints disponibles són:
 1. **treballs/{nomTreball}/peticio/{idPeticio}/fitxers/{nomFitxer} GET** Obté un fitxer resultat d'una petició. El resultat s'envia com application/octet-stream  i "Content-Disposition: attachment; filename="{fitxer}". La codificació és ISO-8859-1. La petició ha d'haver estat feta des del mateix Ajuntament que està obtenint el fitxer. 
     
     Aquest endpoint té tres paràmetres al path:
-   - nomTreball. (8 caràcters màxim). Exemple: xbentri
+   - nomTreball. Pot tenir com a màxim 8 caràcters, i ha d'estar en minúscules. Exemple: xbentri.
    - idPeticio. Número de petició obtingut prèviament al realitzar la petició. 
    - nomFitxer. Nom del fitxer generat pel treball que ja ha finalitzat. Els noms de fitxer s'obtenen amb l'anterior endpoint.
      

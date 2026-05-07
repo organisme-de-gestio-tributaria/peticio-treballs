@@ -47,7 +47,7 @@ Els endpoints disponibles són:
     - 401: Falta autenticació, autenticació incorrecta o no autoritzat pel treball demanat
     - 404: El client no existeix  
     - 406: El client correspon a un municipi no adherit
-    - 500: Error en la gestió de la petició. Un error molt habitual és especificar de manera incorrecta un paràmetre de tipus "data". Les dates s'han de posar en format DD/MM/AAAA (DD=dia, MM=mes, AAAA=any).
+    - 500: Error en la gestió de la petició. Un error molt habitual és especificar de manera incorrecta un paràmetre de tipus "data". Les dates s'han de posar en format DD/MM/AAAA (DD=dia, MM=mes, AAAA=any), encara que a la definició del paràmetre posi "Llargària: 8". Es tracta de la llargària sense tenir en compte les barres, que són caràcters separadors i no es consideren part de la data.
    
     Quan s'ha donat d'alta la petició, es retorna codi 200 amb el número de petició, [podeu veure un exemple aquí](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20resposta%20amb%20num%20peticio.json).
 

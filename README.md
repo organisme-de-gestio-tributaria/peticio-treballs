@@ -43,10 +43,10 @@ Els endpoints disponibles són:
    - Body: dadesPeticio. Petició amb les dades, [podeu veure un exemple aquí](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20peticio%20treball%20POST.json). Les dades de la petició es poden obtenir amb el endpoint anterior i emplenant els ValorParametre. Les dades consisteixen en el nom del treball, el codi de client que identifica l'ajuntament i els paràmetres del treball juntament amb el seu valor. Podeu obtenir una llista dels codis de client i el nom del municipi a través de l'endpoint /municipis.
 
     Codis d'error de retorn:
-    - 400: Cal proporcionar el nom del treball i les dades de la petició       
-    - 401: Falta autenticació, autenticació incorrecta o no autoritzat pel treball demanat
-    - 404: El client no existeix  
-    - 406: El client correspon a un municipi no adherit, o bé l'usuari no té permís per executar aquest treball.
+    - 400: Cal proporcionar el nom del treball i les dades de la petició. El nom del treball cal posar-lo en minúscules.
+    - 401: Falta autenticació, o l'autenticació és incorrecta. Cal respectar les minúscules i majúscules tant al nom de l'usuari com a la contrassenya.
+    - 404: El client no existeix.
+    - 406: El client correspon a un municipi no adherit, o bé l'usuari no té permís per executar aquest treball. Cal contactar amb l'Administrador de l'Ajuntament per verificar que s'ha completat el procés d'adhesió, i que s'ha afegit el permís a l'usuari per demanar aquest treball.
     - 500: Error en la gestió de la petició. Un error molt habitual és especificar de manera incorrecta un paràmetre de tipus "data". Les dates s'han de posar en format DD/MM/AAAA (DD=dia, MM=mes, AAAA=any), encara que a la definició del paràmetre posi "Llargària: 8". Es tracta de la llargària sense tenir en compte les barres, que són caràcters separadors i no es consideren part de la data.
    
     Quan s'ha donat d'alta la petició, es retorna codi 200 amb el número de petició, [podeu veure un exemple aquí](https://github.com/organisme-de-gestio-tributaria/PeticioTreballs/blob/main/Exemples/exemple%201%20-%20pas%201%20resposta%20amb%20num%20peticio.json).
